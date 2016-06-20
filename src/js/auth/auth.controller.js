@@ -14,4 +14,4 @@ export default class AuthCtrl {
         this.isSubmitting = true;
         console.log(this.formData);
     }
-}
+};
