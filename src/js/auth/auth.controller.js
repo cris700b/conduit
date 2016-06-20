@@ -1,4 +1,5 @@
 
+<<<<<<< HEAD
 class AuthCtrl {
 
     constructor($state, User) {
@@ -10,6 +11,14 @@ class AuthCtrl {
         // local reference to the User service
         this._User = User;
 
+=======
+export default class AuthCtrl {
+
+    constructor($state) {
+
+        'ngInject';
+
+>>>>>>> origin/master
         this.title = $state.current.title;
         this.authType = $state.current.name.replace('app.', '');
     }
@@ -17,6 +26,7 @@ class AuthCtrl {
     submitForm(){
 
         this.isSubmitting = true;
+<<<<<<< HEAD
 
         this._User.attemptAuth(this.authType, this.formData)
                 .then(
@@ -38,3 +48,8 @@ class AuthCtrl {
 }
 
 export default AuthCtrl;
+=======
+        console.log(this.formData);
+    }
+}
+>>>>>>> origin/master
