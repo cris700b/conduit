@@ -129,4 +129,24 @@ export default class User{
 
         return deffered.promise;
     }
+
+    // update the current user's details
+    update(details){
+
+        return this._http({
+
+            url: this._AppConstants.api + '/user',
+            method: 'PUT',
+            data: {user: details}
+        })
+        .then(
+
+            (res) => {
+
+                this.current = res.data.user;
+
+                return res.data.user;
+            }
+        );
+    }
 };
