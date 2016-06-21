@@ -73,9 +73,10 @@
         <li class="nav-item">
             <a class="nav-link"
                 ui-sref-active="active"
-                ui-sref="app.profile">
+                ui-sref="app.profile({username: $ctrl.currentUser.username})">
 
-                My profile
+                <img class="user-pic" ng-src="{{$ctrl.currentUser.image}}" />
+                {{$ctrl.currentUser.username}}
             </a>
         </li>
 

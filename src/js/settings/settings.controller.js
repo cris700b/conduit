@@ -30,8 +30,7 @@ class SettingsCtrl {
                       // success callback
                       (user) => {
 
-                          console.log('success!');
-                          this.isSubmitting = false;
+                          this._state.go('app.profile', {username: user.username});
                       },
 
                       // error callback
