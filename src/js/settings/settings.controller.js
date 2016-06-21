@@ -1,9 +1,12 @@
 
 class SettingsCtrl {
 
-    constructor(User) {
+    constructor($state, User) {
 
         'ngInject';
+
+        this._User = User;
+        this._state = $state;
 
         this.formData = {
 
@@ -18,6 +21,27 @@ class SettingsCtrl {
         this.logout = User.logout.bind(User);
     }
 
+    submitForm(){
+
+        this.isSubmitting = true;
+        this._User.update(this.formData)
+                  .then(
+
+                      // success callback
+                      (user) => {
+
+                          console.log('success!');
+                          this.isSubmitting = false;
+                      },
+
+                      // error callback
+                      (err) => {
+
+                          this.isSubmitting = false;
+                          this.errors = err.data.errors;
+                      }
+                  );
+    }
 
 };
 
