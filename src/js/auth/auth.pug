@@ -1,0 +1,53 @@
+
+div.auth-page
+    div.container.page
+        div.row
+            div.col-md-6.offset-md-3.colxs-12
+                h1.text-xs-center(
+                    ng-bind="::$ctrl.title"
+                )
+
+                p.text-xs-center
+                    a(
+                        ui-sref="app.login"
+                        ng-show="$ctrl.authType === 'register'"
+                    )
+
+
+                        Have an account?
+
+                    a(
+                        ui-sref="app.register"
+                        ng-show="$ctrl.authType === 'login'"
+                    )
+
+                        | Need an account?
+
+                // list the errors using the list-errors component
+                list-errors(errors="$ctrl.errors")
+
+                form(ng-submit="$ctrl.submitForm()")
+                    fieldset(ng-disabled="$ctrl.isSubmitting")
+
+                        fieldset.form-group(ng-show="$ctrl.authType === 'register'")
+                            input.form-control.form-control-lg(
+                                type="text" placeholder="Username"
+                                ng-model="$ctrl.formData.username"
+                            )
+
+                        fieldset.form-group
+                            input.form-control.form-control-lg(
+                                type="email" placeholder="Email"
+                                ng-model="$ctrl.formData.email"
+                            )
+
+                        fieldset.form-group
+                            input.form-control.form-control-lg(
+                                type="password" placeholder="Password"
+                                ng-model="$ctrl.formData.password"
+                            )
+
+                        button.btnbtn-lg.btn-primary.pull-xs-right(
+                            type="submit"
+                            ng-bind="::$ctrl.title"
+                        )

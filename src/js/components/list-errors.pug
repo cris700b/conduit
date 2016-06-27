@@ -1,0 +1,6 @@
+
+ul.error-messages(ng-show="$ctrl.errors")
+    div(ng-repeat="(field, errors) in $ctrl.errors")
+        li(ng-repeat="error in errors")
+
+            | {{field}} {{error}}

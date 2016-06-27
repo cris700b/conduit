@@ -1,0 +1,12 @@
+
+footer
+    div.container
+        a.logo-font(
+            ui-sref="app.home"
+            ng-bind="::$ctrl.appName | lowercase")
+        span.attribution
+            | &copy; {{::$ctrl.date | date:'yyyy'}}.
+            | An interactive learning project from
+            a( href="https://thinkster.io")
+                | Thinkster.
+            |Code licensed under MIT.

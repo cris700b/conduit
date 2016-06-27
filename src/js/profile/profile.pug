@@ -1,0 +1,72 @@
+
+div.profile-page
+
+    // User's basic info & action buttons
+    div.user-info
+        div.container
+            div.row
+                div.col-xs-12.col-md-10.offset-md-1
+
+                    img.user-img( ng-src="{{::$ctrl.profile.image}}")
+                    h4( ng-bind="::$ctrl.profile.username")
+                    p( ng-bind="::$ctrl.profile.bio")
+
+                    a.btn.btn-sm.btn-outline-secondary.action-btn(
+                        ui-sref="app.settings"
+                        ng-show="$ctrl.isUser"
+                    )
+
+                        i.ion-gear-a
+                            |Edit Profile Settings
+
+                    button.btn.btn-sm.btn-outline-secondary.action-btn(
+                        ng-hide="$ctrl.isUser")
+
+                        i.ion-plus-round
+                        |&nbsp;
+                        |Follow
+
+    // Container where User's posts & favs are list w/ toggle tabs
+    div.container
+        div.row
+            div.col-xs-12.col-md-10.offset-md-1
+
+                // Tabs for switching between author articles & favorites
+                div.articles-toggle
+                    ul.nav.nav-pills.outline-active
+                        li.nav-item
+                            a.nav-link.active
+                                |My Articles
+
+                        li.nav-item
+                            a.nav-link
+                                |Favorited Articles
+
+                // List of articles
+                div.article-preview
+                    div.article-meta
+                        a( href="")
+                            img
+                        div.info
+                            a.author( href="")
+                                |BradGreen
+                            span.date
+                                |January 20th
+                        button.btn.btn-outline-primary.btn-sm.pull-xs-right
+                            i.ion-heart
+                                |29
+
+                    a.preview-link( href="")
+                        h1
+                            |How to build Angular apps that scale
+                        p
+                            |Building web applications is not an easy task. It's even hard to make ones that scale.
+                        span
+                            |Read more...
+                        ul.tag-list
+                            li.tag-default.tag-pill.tag-outline
+                                |programming
+                            li.tag-default.tag-pill.tag-outline
+                                |web
+
+            // End row & container divs

@@ -1,0 +1,108 @@
+
+div.article-page
+
+    // Banner for article title, action buttons
+    div.banner
+        div.container
+
+            h1
+                |Example article title
+
+            div.article-meta
+
+                // Show author info + favorite & follow buttons
+                div.article-meta
+                    a( href="")
+                        img
+                    div.info
+                        a.author(href="")
+                            | Brad Green
+                        span.date
+                            |January 20th
+
+                    button.btn.btn-sm.btn-outline-secondary
+                        i.ion-plus-round
+
+                        | &nbsp;
+                        |Follow Brad Green
+
+                    |&nbsp;
+                    button.btn.btn-sm.btn-outline-primary
+                        i.ion-heart
+                        |&nbsp;
+                        |Favorite Article
+
+                        span.counter
+                            |(29)
+
+            // Main view. Contains article html and comments
+            div.container.page
+
+                // Article's HTML & tags rendered here
+                div.row.article-content
+                    div.col-xs-12
+
+                        div
+                            p
+                                | This is the content of our article.
+
+                        ul.tag-list
+                            li.tag-default.tag-pill.tag-outline
+                                | Tag One
+
+                            li.tag-default.tag-pill.tag-outline
+
+                                | Tag Two
+
+                hr
+                div.article-actions
+
+                    // Show author info + favorite & follow buttons
+                    div.article-meta
+                        a(href="")
+                            img
+                        div.info
+                            a.author(href="")
+                                | Brad Green
+                            span.date
+                                | January 20th
+
+                        button.btn.btn-sm.btn-outline-secondary
+                            i.ion-plus-round
+                            | &nbsp;
+                            | Follow Brad Green
+
+                        | &nbsp;
+                        button.btn.btn-sm.btn-outline-primary
+                            i.ion-heart
+                            | &nbsp;
+                            | Favorite Article
+                            span.counter
+                                | (29)
+
+                // Comments section
+                div.row
+                    div.col-xs-12.col-md-8.offset-md-2
+                        div
+                            form.card.comment-form
+                                div.card-block
+                                    textarea.form-control(
+                                        placeholder="Write a comment..."
+                                        rows="3")
+                                div.card-footer
+                                    img.comment-author-img
+                                    button.btn.btn-sm.btn-primary( type="submit")
+                                        | Post Comment
+                        div.card
+                            div.card-block
+                                p.card-text
+                                    | This is an example comment.
+                            div.card-footer
+                                a.comment-author(href="")
+                                    img.comment-author-img
+
+                                | &nbsp;
+                                a.comment-author(href="")
+                                    | BradGreen
+                                span.date-posted
+                                    | Jan 20, 2016

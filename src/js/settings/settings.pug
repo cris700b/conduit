@@ -1,0 +1,57 @@
+
+div.settings-page
+    div.container.page
+        div.row
+            div.col-md-6.offset-md-3.col-xs-12
+
+                h1.text-xs-center
+                list-errors( errors='$ctrl.errors')
+
+                form( ng-submit='$ctrl.submitForm')
+
+                    fieldset( ng-disabled='$ctrl.isSubmitting')
+
+                        fieldset.form-group
+                            input.form-control( type='text'
+                                placeholder='URL of profile image'
+                                ng-model='$ctrl.formData.image'
+                            )
+
+                        fieldset.form-group
+                            input.form-control.form-control-lg(
+                                type="text"
+                                placeholder="Username"
+                                ng-model="$ctrl.formData.username"
+                            )
+
+                        fieldset.form-group
+                            textarea.form-control.form-control-lg(
+                                rows="8"
+                                placeholder="Short bio about you"
+                                ng-model="$ctrl.formData.bio"
+                            )
+
+                        fieldset.form-group
+                            input.form-control.form-control-lg(
+                                type="email"
+                                placeholder="Email"
+                                ng-model="$ctrl.formData.email"
+                            )
+
+                        fieldset.form-group
+                            input.form-control.form-control-lg(
+                                type="password"
+                                placeholder="New password"
+                                ng-model="$ctrl.formData.password"
+                            )
+
+                        button.btn.btn-lg.btn-primary.pull-xs-right(
+                            type="submit"
+                        )
+                            |Update Settings
+
+                hr
+                button.btn.btn-outline-danger(
+                    ng-click="$ctrl.logout()"
+                )
+                    |Or click here to logout
