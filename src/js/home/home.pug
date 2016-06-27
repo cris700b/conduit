@@ -1,0 +1,69 @@
+
+div.home-page
+
+    // Splash banner that only shows when not logged in
+    div.banner( show-authed="false")
+        div.container
+            h1.logo-font( ng-bind="::$ctrl.appName | lowercase")
+            p
+                |A place to share your knowledge.
+
+    div.container.page
+        div.row
+
+            // Main view - contains tabs & article list
+            div.col-md-9
+
+                // Tabs for toggling between feed, article lists
+                div.feed-toggle
+                    ul.nav.nav-pills.outline-active
+
+                        li.nav-item( show-authed="true")
+                            a.nav-link.active( href="")
+                                |Your Feed
+
+                        li.nav-item
+                            a.nav-link( href="")
+                                |Global Feed
+
+                // List the current articles
+                div.article-preview
+                    div.article-meta
+                        a( href="")
+                            img
+                    div.info
+                        a.author( href="")
+                            |BradGreen
+                        span.date
+                            |January 20th
+
+                        button.btn.btn-outline-primary.btn-sm.pull-xs-right
+                            i.ion-heart
+                            |29
+                    a.preview-link( href="")
+                        h1
+                            |How to build Angular apps that scale
+                        p
+                            |Building web applications is not an easy task. It's even hard to make ones that scale.
+                        span
+                            |Read more...
+
+                    ul.tag-list
+                        li.tag-default.tag-pill.tag-outline
+                            |programming
+                        li.tag-default.tag-pill.tag-outline
+                            |web
+
+            // Sidebar where popular tags are listed
+            div.col-md-3
+                div.sidebar
+                    p
+                        |Popular Tags
+
+                    div.tag-list
+                        a.tag-default.tag-pill( href="")
+                            |Tag One
+                        a.tag-default.tag-pill( href="")
+                            |Tag Two
+
+        // End the row & container divs

@@ -1,4 +1,7 @@
+
 var gulp          = require('gulp');
+//var pluginsLoader = require('gulp-load-plugins');
+
 var notify        = require('gulp-notify');
 var source        = require('vinyl-source-stream');
 var browserify    = require('browserify');
@@ -12,14 +15,29 @@ var merge         = require('merge-stream');
 
 // @@ jade support
 var jade = require('gulp-jade');
+var path = require('path');
+var fs = require('fs');
 
 // Where our files are located
-var jsFiles   = "src/js/**/*.js";
-var viewFiles = "src/js/**/*.html";
+var dirs = {
+
+    src: 'src/js/**',
+    compile: './compiled',
+    build: './build'
+};
+
+var files = {
+
+    js : dirs.src + '/*.js',
+    view : dirs.src + '/*.pug'
+};
+
+//var jsFiles   = 'src/js/**/*.js';
+//var viewFiles = 'src/js/**/*.pug';
 
 // @@ jade templates location
-var tplFiles = "src/js/**/*.pug";
-var tplCompileDir = "src/js";
+//var tplFiles = 'src/js/**/*.jade';
+//var tplCompileDir = "src/js";
 
 var interceptErrors = function(error) {
 
@@ -49,66 +67,66 @@ gulp.task('browserify', ['views'], function() {
         .pipe(source('main.js'))
 
         // Start piping stream to tasks!
-        .pipe(gulp.dest('./build/'));
+        .pipe(gulp.dest(dirs.build));
 });
 
 // jade templates task
+// this task replaces the views task
 gulp.task('jade', function(){
 
                 // jade templates source files
-    return gulp.src(tplFiles)
+    return gulp.src(files.view)
 
                 // pipe to jade plugin
-                .pipe(jade({
-
-                            locals: tplFiles,
-                            pretty: true
-                        })
-                    )
+                .pipe(jade({pretty: true}))
+                .on('error', interceptErrors)
 
                 // copy the compiled html files
                 // to the appropriate component folder
-                .pipe(gulp.dest(tplCompileDir));
+                .pipe(gulp.dest(dirs.compile));
 });
 
 gulp.task('html', function() {
 
-    return gulp.src("src/index.html")
-        .on('error', interceptErrors)
-        .pipe(gulp.dest('./build/'));
+    return gulp.src("src/index.jade")
+                .pipe(jade())
+                .on('error', interceptErrors)
+                .pipe(gulp.dest(dirs.build));
 });
 
+// this task is replaced by a newer one that uses jade(pug)
 gulp.task('views', function() {
 
-    return gulp.src(viewFiles)
+    return gulp.src(files.view)
+                .pipe(jade())
                 .pipe(templateCache({
 
                     standalone: true
                 }))
                 .on('error', interceptErrors)
                 .pipe(rename("app.templates.js"))
-                .pipe(gulp.dest('./src/js/config/'));
+                .pipe(gulp.dest(dirs.src.replace('**', 'config/')));
 });
 
 // This task is used for building production ready
 // minified JS/CSS files into the dist/ folder
-gulp.task('build', ['jade', 'html', 'browserify'], function() {
+gulp.task('build', ['html', 'browserify'], function() {
 
     var html = gulp.src("build/index.html")
-                    .pipe(gulp.dest('./dist/'));
+                    .pipe(gulp.dest(dirs.dist));
 
     var js = gulp.src("build/main.js")
                 .pipe(uglify())
-                .pipe(gulp.dest('./dist/'));
+                .pipe(gulp.dest(dirs.dist));
 
     return merge(html,js);
 });
 
-gulp.task('default', ['jade', 'html', 'browserify'], function() {
+gulp.task('default', ['html', 'browserify'], function() {
 
-    browserSync.init(['./build/**/**.**'], {
+    browserSync.init([dirs.build + '/**/**.**'], {
 
-        server: "./build",
+        server: dirs.build,
         port: 4000,
         notify: false,
         ui: {
@@ -118,10 +136,10 @@ gulp.task('default', ['jade', 'html', 'browserify'], function() {
     });
 
     // jade templates update task
-    gulp.watch(tplFiles, ['jade']);
+    //gulp.watch(tplFiles, ['views']);
 
     gulp.watch("src/index.html", ['html']);
-    gulp.watch(viewFiles, ['views']);
-    gulp.watch(jsFiles, ['browserify']);
+    gulp.watch(files.view, ['views']);
+    gulp.watch(files.js, ['browserify']);
 
 });
