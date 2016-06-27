@@ -22,22 +22,15 @@ var fs = require('fs');
 var dirs = {
 
     src: 'src/js/**',
-    compile: './compiled',
+    public: './public',
     build: './build'
 };
 
 var files = {
 
-    js : dirs.src + '/*.js',
-    view : dirs.src + '/*.pug'
+    js: dirs.src + '/*.js',
+    view: dirs.src + '/*.jade'
 };
-
-//var jsFiles   = 'src/js/**/*.js';
-//var viewFiles = 'src/js/**/*.pug';
-
-// @@ jade templates location
-//var tplFiles = 'src/js/**/*.jade';
-//var tplCompileDir = "src/js";
 
 var interceptErrors = function(error) {
 
@@ -83,7 +76,7 @@ gulp.task('jade', function(){
 
                 // copy the compiled html files
                 // to the appropriate component folder
-                .pipe(gulp.dest(dirs.compile));
+                .pipe(gulp.dest(dirs.public));
 });
 
 gulp.task('html', function() {
