@@ -7,7 +7,7 @@ div.settings-page
                 h1.text-xs-center
                 list-errors( errors='$ctrl.errors')
 
-                form( ng-submit='$ctrl.submitForm')
+                form( ng-submit='$ctrl.submitForm()')
 
                     fieldset( ng-disabled='$ctrl.isSubmitting')
 
