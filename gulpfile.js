@@ -15,14 +15,12 @@ var merge         = require('merge-stream');
 
 // @@ jade support
 var jade = require('gulp-jade');
-var path = require('path');
-var fs = require('fs');
 
 // Where our files are located
 var dirs = {
 
     src: 'src/js/**',
-    public: './public',
+    compiled: './compiled',
     build: './build'
 };
 
@@ -64,11 +62,12 @@ gulp.task('browserify', ['views'], function() {
 });
 
 // jade templates task
-// this task replaces the views task
-gulp.task('jade', function(){
+// this task compiles the jade templates
+// and copies the generated files in the compiled directory
+gulp.task('compileTpls', function(){
 
                 // jade templates source files
-    return gulp.src(files.view)
+    return gulp.src([files.view, 'src/index.jade'])
 
                 // pipe to jade plugin
                 .pipe(jade({pretty: true}))
@@ -76,22 +75,13 @@ gulp.task('jade', function(){
 
                 // copy the compiled html files
                 // to the appropriate component folder
-                .pipe(gulp.dest(dirs.public));
-});
-
-gulp.task('html', function() {
-
-    return gulp.src("src/index.jade")
-                .pipe(jade())
-                .on('error', interceptErrors)
-                .pipe(gulp.dest(dirs.build));
+                .pipe(gulp.dest(dirs.compiled));
 });
 
 // this task is replaced by a newer one that uses jade(pug)
-gulp.task('views', function() {
+gulp.task('views', ['compileTpls'], function() {
 
-    return gulp.src(files.view)
-                .pipe(jade())
+    return gulp.src(dirs.compiled + '/**/*.html')
                 .pipe(templateCache({
 
                     standalone: true
@@ -99,6 +89,14 @@ gulp.task('views', function() {
                 .on('error', interceptErrors)
                 .pipe(rename("app.templates.js"))
                 .pipe(gulp.dest(dirs.src.replace('**', 'config/')));
+});
+
+gulp.task('html', function() {
+
+    return gulp.src("src/index.jade")
+                .pipe(jade({pretty: true, doctype: 'html'}))
+                .on('error', interceptErrors)
+                .pipe(gulp.dest(dirs.build));
 });
 
 // This task is used for building production ready
