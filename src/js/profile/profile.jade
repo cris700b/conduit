@@ -11,6 +11,8 @@ div.profile-page
                     h4( ng-bind="::$ctrl.profile.username")
                     p( ng-bind="::$ctrl.profile.bio")
 
+                    follow-btn( user="$ctrl.profile" ng-hide="$ctrl.isUser")
+
                     a.btn.btn-sm.btn-outline-secondary.action-btn(
                         ui-sref="app.settings"
                         ng-show="$ctrl.isUser"
@@ -18,13 +20,6 @@ div.profile-page
 
                         i.ion-gear-a
                             |Edit Profile Settings
-
-                    button.btn.btn-sm.btn-outline-secondary.action-btn(
-                        ng-hide="$ctrl.isUser")
-
-                        i.ion-plus-round
-                        |&nbsp;
-                        |Follow
 
     // Container where User's posts & favs are list w/ toggle tabs
     div.container
