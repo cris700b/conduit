@@ -8,65 +8,19 @@ nav.navbar.navbar-light
     )
 
     // Show this for logged out users
-    ul.nav.navbar-nav.pull-xs-right( show-authed="false")
-
-        li.nav-item
-            a.nav-link(
-                ui-sref-active="active"
-                ui-sref="app.home"
-            )
-
-                |Home
-
-        li.nav-item
-            a.nav-link(
-                ui-sref-active="active"
-                ui-sref="app.login"
-            )
-
-                |Sign in
-
-        li.nav-item
-            a.nav-link(
-                ui-sref-active="active"
-                ui-sref="app.register"
-            )
-
-                |Sign up
-
+    +states-ul(['home', 'login', 'register'])(show-authed="false")
+    
     // Show this for logged in users
-    ul.nav.navbar-nav.pull-xs-right( show-authed="true")
-
-        li.nav-item
-            a.nav-link(
-                ui-sref-active="active"
-                ui-sref="app.home"
-            )
-
-                |Home
-
-        li.nav-item
-            a.nav-link(
-                ui-sref-active="active"
-                ui-sref="app.article"
-            )
-
-                |Article
-
-        li.nav-item
-            a.nav-link(
-                ui-sref-active="active"
-                ui-sref="app.settings"
-            )
-
+    +states-ul(['home', 'article'])(show-authed="true")
+    
+        +state-li('settings')
+            block settings
                 i.ion-gear-a
                 |&nbsp; Settings
 
-        li.nav-item
-            a.nav-link(
-                ui-sref-active="active"
+        +state-li('profile')( 
                 ui-sref="app.profile({username: $ctrl.currentUser.username})"
             )
-
+            block profile
                 img.user-pic( ng-src="{{$ctrl.currentUser.image}}")
                 |{{$ctrl.currentUser.username}}
