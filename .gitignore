@@ -36,4 +36,6 @@ node_modules
 
 build/*
 dist/*
+compiled/**/*.html
+src/mixins/jade_components.jade
 src/js/config/app.templates.js

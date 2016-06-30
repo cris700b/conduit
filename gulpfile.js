@@ -16,18 +16,35 @@ var merge         = require('merge-stream');
 // @@ jade support
 var jade = require('gulp-jade');
 
+// @@ plugin used for prepending
+// the jade mixin include statement to all jade view files
+var insert = require('gulp-insert');
+
+// @@ plugin for file concatenation
+// used for concatenting the jade mixins
+var concat = require('gulp-concat');
+
+// @@ node path module
+// used for getting the relative path
+// between the concatenated mixins file
+// and the currently working file
+var path = require('path');
+
+
 // Where our files are located
 var dirs = {
 
     src: 'src/js/**',
     compiled: './compiled',
-    build: './build'
+    build: './build',
+    mixins: 'src/mixins'
 };
 
 var files = {
 
     js: dirs.src + '/*.js',
-    view: dirs.src + '/*.jade'
+    view: dirs.src + '/*.jade',
+    mixins: dirs.mixins + '/**/*.jade'
 };
 
 var interceptErrors = function(error) {
@@ -61,21 +78,43 @@ gulp.task('browserify', ['views'], function() {
         .pipe(gulp.dest(dirs.build));
 });
 
+gulp.task('concatMixins', function(){
+
+    return gulp.src(files.mixins)
+                .pipe(concat('jade_components.jade'))
+                .on('error', interceptErrors)
+                .pipe(gulp.dest(dirs.mixins))
+});
+
 // jade templates task
 // this task compiles the jade templates
 // and copies the generated files in the compiled directory
-gulp.task('compileTpls', function(){
+gulp.task('compileTpls', ['concatMixins'], function(){
 
                 // jade templates source files
-    return gulp.src([files.view, 'src/index.jade'])
+    return gulp.src([files.view, 'src/index.jade', '!' + files.mixins])
 
-                // pipe to jade plugin
+                // before jade compilation, add the include statement
+                // for the jade mixin files
+                .pipe(insert.transform(function(contents, file) {
+
+                    var includePath = path.relative(file.path, dirs.mixins);
+
+                    includePath = includePath.replace('.', '') + '/jade_components';
+                    console.log('path : ' + includePath);
+
+                    var mixinsIncluded = 'include ' + includePath  + '\n' + contents;
+
+                    return mixinsIncluded;
+                }))
+
+                // compile the jade templates
                 .pipe(jade({pretty: true}))
                 .on('error', interceptErrors)
 
                 // copy the compiled html files
                 // to the appropriate component folder
-                .pipe(gulp.dest(dirs.compiled));
+                .pipe(gulp.dest(dirs.compiled))
 });
 
 // this task is replaced by a newer one that uses jade(pug)
