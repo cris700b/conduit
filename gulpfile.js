@@ -30,6 +30,8 @@ var concat = require('gulp-concat');
 // and the currently working file
 var path = require('path');
 
+// @@ node module for clearing thr previous compilation
+var del = require('del');
 
 // Where our files are located
 var dirs = {
@@ -62,6 +64,15 @@ var interceptErrors = function(error) {
     this.emit('end');
 };
 
+// @@ cleaning task
+gulp.task('clean', function(){
+
+    return gulp.src([dirs.compiled, dirs.build, dirs.src + '/configuration/app.templates.js', dirs.mixins + '/jade_components.jade'])
+                .pipe(del())
+                .on('errors', interceptErrors)
+                .pipe(gulp.dest(dirs.compiled))
+
+});
 
 gulp.task('browserify', ['views'], function() {
 
@@ -78,7 +89,7 @@ gulp.task('browserify', ['views'], function() {
         .pipe(gulp.dest(dirs.build));
 });
 
-gulp.task('concatMixins', function(){
+gulp.task('concatMixins', ['clean'], function(){
 
     return gulp.src(files.mixins)
                 .pipe(concat("jade_components.jade"))
