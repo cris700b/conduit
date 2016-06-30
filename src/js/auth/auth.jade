@@ -13,8 +13,7 @@ div.auth-page
                         ng-show="$ctrl.authType === 'register'"
                     )
 
-
-                        Have an account?
+                        |Have an account?
 
                     a(
                         ui-sref="app.register"
@@ -29,25 +28,16 @@ div.auth-page
                 form(ng-submit="$ctrl.submitForm()")
                     fieldset(ng-disabled="$ctrl.isSubmitting")
 
-                        fieldset.form-group(ng-show="$ctrl.authType === 'register'")
-                            input.form-control.form-control-lg(
-                                type="text" placeholder="Username"
-                                ng-model="$ctrl.formData.username"
-                            )
+                        // username field
+                        +form-control("text", "Username", "formData.username")( ng-show="$ctrl.authType === 'register'")
+                        
+                        // email field
+                        +form-control("email", "Email", "formData.email")
 
-                        fieldset.form-group
-                            input.form-control.form-control-lg(
-                                type="email" placeholder="Email"
-                                ng-model="$ctrl.formData.email"
-                            )
+                        // password field
+                        +form-control("password", "Password", "formData.password")
 
-                        fieldset.form-group
-                            input.form-control.form-control-lg(
-                                type="password" placeholder="Password"
-                                ng-model="$ctrl.formData.password"
-                            )
-
-                        button.btnbtn-lg.btn-primary.pull-xs-right(
+                        button.btn.btn-lg.btn-primary.pull-xs-right(
                             type="submit"
                             ng-bind="::$ctrl.title"
                         )
