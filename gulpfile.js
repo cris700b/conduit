@@ -81,7 +81,7 @@ gulp.task('browserify', ['views'], function() {
 gulp.task('concatMixins', function(){
 
     return gulp.src(files.mixins)
-                .pipe(concat('jade_components.jade'))
+                .pipe(concat("jade_components.jade"))
                 .on('error', interceptErrors)
                 .pipe(gulp.dest(dirs.mixins))
 });
@@ -101,7 +101,6 @@ gulp.task('compileTpls', ['concatMixins'], function(){
                     var includePath = path.relative(file.path, dirs.mixins);
 
                     includePath = includePath.replace('.', '') + '/jade_components';
-                    console.log('path : ' + includePath);
 
                     var mixinsIncluded = 'include ' + includePath  + '\n' + contents;
 
@@ -130,7 +129,7 @@ gulp.task('views', ['compileTpls'], function() {
                 .pipe(gulp.dest(dirs.src.replace('**', 'config/')));
 });
 
-gulp.task('html', function() {
+gulp.task('html', ['compileTpls'], function() {
 
     return gulp.src("src/index.jade")
                 .pipe(jade({pretty: true, doctype: 'html'}))
@@ -165,8 +164,7 @@ gulp.task('default', ['html', 'browserify'], function() {
         }
     });
 
-    // jade templates update task
-    //gulp.watch(tplFiles, ['views']);
+    gulp.watch(files.mixins, ['compileTpls']);
 
     gulp.watch("src/index.html", ['html']);
     gulp.watch(files.view, ['views']);

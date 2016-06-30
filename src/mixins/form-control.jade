@@ -1,0 +1,11 @@
+
+// form-control mixin
+mixin form-control(fldType, pholder, model)
+
+    fieldset.form-group&attributes(attributes)
+        
+        input.form-control.form-control-lg(
+            type=fldType placeholder=pholder
+            ng-model="$ctrl." + model
+        )
+        

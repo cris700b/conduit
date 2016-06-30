@@ -1,0 +1,12 @@
+
+// states-nav mixin
+mixin states-ul(appStates)
+    
+    ul.nav.navbar-nav.pull-xs-right&attributes(attributes)
+        
+        each state in appStates
+            
+            +state-li(state)
+            
+            if block
+                block
