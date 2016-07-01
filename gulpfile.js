@@ -46,7 +46,8 @@ var files = {
 
     js: dirs.src + '/*.js',
     view: dirs.src + '/*.jade',
-    mixins: dirs.mixins + '/**/*.jade'
+    mixins: dirs.mixins + '/**/*.jade',
+    ngCacheTpls: dirs.src + '/configuration/app.templates.js', jadeComponents: dirs.mixins + '/jade_components.jade'
 };
 
 var interceptErrors = function(error) {
@@ -64,16 +65,6 @@ var interceptErrors = function(error) {
     this.emit('end');
 };
 
-// @@ cleaning task
-gulp.task('clean', function(){
-
-    return gulp.src([dirs.compiled, dirs.build, dirs.src + '/configuration/app.templates.js', dirs.mixins + '/jade_components.jade'])
-                .pipe(del())
-                .on('errors', interceptErrors)
-                .pipe(gulp.dest(dirs.compiled))
-
-});
-
 gulp.task('browserify', ['views'], function() {
 
     return browserify('./src/js/app.js')
@@ -87,6 +78,12 @@ gulp.task('browserify', ['views'], function() {
 
         // Start piping stream to tasks!
         .pipe(gulp.dest(dirs.build));
+});
+
+// @@ cleaning task
+gulp.task('clean', function(){
+
+    return del([dirs.compiled, files.ngCacheTpls, files.jadeComponents]);
 });
 
 gulp.task('concatMixins', ['clean'], function(){
@@ -175,7 +172,7 @@ gulp.task('default', ['html', 'browserify'], function() {
         }
     });
 
-    gulp.watch(files.mixins, ['compileTpls']);
+    gulp.watch([files.mixins, '!' + files.mixins], ['compileTpls']);
 
     gulp.watch("src/index.html", ['html']);
     gulp.watch(files.view, ['views']);
