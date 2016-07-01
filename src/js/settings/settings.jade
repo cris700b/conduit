@@ -10,40 +10,25 @@ div.settings-page
                 form( ng-submit='$ctrl.submitForm()')
 
                     fieldset( ng-disabled='$ctrl.isSubmitting')
+                        
+                        // profile image
+                        +form-control("text", "URL of profile image", "formData.image")
 
-                        fieldset.form-group
-                            input.form-control( type='text'
-                                placeholder='URL of profile image'
-                                ng-model='$ctrl.formData.image'
-                            )
-
-                        fieldset.form-group
-                            input.form-control.form-control-lg(
-                                type="text"
-                                placeholder="Username"
-                                ng-model="$ctrl.formData.username"
-                            )
-
+                        // username field
+                        +form-control("text", "Username", "formData.username")
+                        
                         fieldset.form-group
                             textarea.form-control.form-control-lg(
                                 rows="8"
                                 placeholder="Short bio about you"
                                 ng-model="$ctrl.formData.bio"
                             )
+                        
+                        // email field
+                        +form-control("email", "Email", "formData.email")
 
-                        fieldset.form-group
-                            input.form-control.form-control-lg(
-                                type="email"
-                                placeholder="Email"
-                                ng-model="$ctrl.formData.email"
-                            )
-
-                        fieldset.form-group
-                            input.form-control.form-control-lg(
-                                type="password"
-                                placeholder="New password"
-                                ng-model="$ctrl.formData.password"
-                            )
+                        // bio field
+                        +form-control("password", "New password", "formData.password")
 
                         button.btn.btn-lg.btn-primary.pull-xs-right(
                             type="submit"
