@@ -172,10 +172,8 @@ gulp.task('default', ['html', 'browserify'], function() {
         }
     });
 
-    gulp.watch([files.mixins, '!' + files.mixins], ['compileTpls']);
-
     gulp.watch("src/index.html", ['html']);
-    gulp.watch(files.view, ['views']);
+    gulp.watch([files.view, '!' + files.mixins], ['views']);
     gulp.watch(files.js, ['browserify']);
 
 });

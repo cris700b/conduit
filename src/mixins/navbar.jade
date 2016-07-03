@@ -1,0 +1,12 @@
+
+// states-nav mixin
+mixin navbar(items)
+    
+    ul.nav.navbar-nav.pull-xs-right&attributes(attributes)
+        
+        each item in items
+            
+            +nav-item(item)
+            
+        if block
+            block
