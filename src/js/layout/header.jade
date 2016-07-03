@@ -7,66 +7,21 @@ nav.navbar.navbar-light
         ng-bind="::$ctrl.appName | lowercase"
     )
 
+    - var publicNavItems = [{state: 'home'}, {state: 'login', label: 'Sign In'}, {state: 'register', label: 'Sign Up'}]
+    
     // Show this for logged out users
-    ul.nav.navbar-nav.pull-xs-right( show-authed="false")
+    +navbar(publicNavItems)( show-authed="false")
 
-        li.nav-item
-            a.nav-link(
-                ui-sref-active="active"
-                ui-sref="app.home"
-            )
-
-                |Home
-
-        li.nav-item
-            a.nav-link(
-                ui-sref-active="active"
-                ui-sref="app.login"
-            )
-
-                |Sign in
-
-        li.nav-item
-            a.nav-link(
-                ui-sref-active="active"
-                ui-sref="app.register"
-            )
-
-                |Sign up
-
+    -var authNavItems = [{state: 'home'}, {state: 'article'}]
+    
     // Show this for logged in users
-    ul.nav.navbar-nav.pull-xs-right( show-authed="true")
-
-        li.nav-item
-            a.nav-link(
-                ui-sref-active="active"
-                ui-sref="app.home"
-            )
-
-                |Home
-
-        li.nav-item
-            a.nav-link(
-                ui-sref-active="active"
-                ui-sref="app.article"
-            )
-
-                |Article
-
-        li.nav-item
-            a.nav-link(
-                ui-sref-active="active"
-                ui-sref="app.settings"
-            )
-
-                i.ion-gear-a
-                |&nbsp; Settings
-
-        li.nav-item
-            a.nav-link(
-                ui-sref-active="active"
-                ui-sref="app.profile({username: $ctrl.currentUser.username})"
-            )
+    +navbar(authNavItems)( show-authed="true")
+        
+        +nav-item({state: 'settings'})
+            i.ion-gear-a 
+            |&nbsp;
+        
+        +nav-item({state: "profile({username: $ctrl.currentUser.username})", label: " "})
 
                 img.user-pic( ng-src="{{$ctrl.currentUser.image}}")
                 |{{$ctrl.currentUser.username}}
