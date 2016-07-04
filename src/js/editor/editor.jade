@@ -11,20 +11,16 @@ div.editor-page
                     
                         +form-control("text", "Article Title", "article.title")
                         
-                        +form-control("text", "Wat's this article about?", "acrycle.description")
+                        +form-control("text", "Wat's this article about?", "article.description")
                         
-                        +form-control("textarea", "Write your article (in markdown)", "acrticle.body", 8)
+                        +form-control("textarea", "Write your article (in markdown)", "article.body", 8)
                         
-                        +form-control("text", "Enter tag", "tagField")
+                        +form-control("text", "Enter tag", "tagField")(fldAttrs={'ng-keyup': '$event.keyCode == 13 && $ctrl.addTag()'})
                             
                             div.tag-list
-                                span.tag-default.tag-pill
-                                    i.ion-close-round
-                                        | Example tag
+                                span.tag-default.tag-pill( ng-repeat="tag in $ctrl.article.tagList")
+                                    i.ion-close-round( ng-click="$ctrl.removeTag(tag)")
+                                        | &nbsp;{{tag}}
                                         
-                                span.tag-default.tag-pill
-                                    i.ion-close-round
-                                        | Another tag
-                                        
-                        button.btn.btn-lg.pull-xs-right.btn-primary
+                        button.btn.btn-lg.pull-xs-right.btn-primary(ng-click="$ctrl.submit()")
                             | Publish Article
