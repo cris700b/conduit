@@ -1,0 +1,30 @@
+
+div.editor-page
+    div.container.page
+        div.row
+            div.col-md-10.offset-md-1.col-xs-12
+            
+                list-errors( errors="$ctrl.errors")
+                
+                form
+                    fieldset(ng-disabled="$ctrl.isSubmitting")
+                    
+                        +form-control("text", "Article Title", "article.title")
+                        
+                        +form-control("text", "Wat's this article about?", "acrycle.description")
+                        
+                        +form-control("textarea", "Write your article (in markdown)", "acrticle.body", 8)
+                        
+                        +form-control("text", "Enter tag", "tagField")
+                            
+                            div.tag-list
+                                span.tag-default.tag-pill
+                                    i.ion-close-round
+                                        | Example tag
+                                        
+                                span.tag-default.tag-pill
+                                    i.ion-close-round
+                                        | Another tag
+                                        
+                        button.btn.btn-lg.pull-xs-right.btn-primary
+                            | Publish Article
