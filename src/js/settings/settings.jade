@@ -17,12 +17,8 @@ div.settings-page
                         // username field
                         +form-control("text", "Username", "formData.username")
                         
-                        fieldset.form-group
-                            textarea.form-control.form-control-lg(
-                                rows="8"
-                                placeholder="Short bio about you"
-                                ng-model="$ctrl.formData.bio"
-                            )
+                        // bio field
+                        +form-control("textarea", "Short bio about you", "formData.bio", 8)
                         
                         // email field
                         +form-control("email", "Email", "formData.email")

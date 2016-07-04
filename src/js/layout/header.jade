@@ -12,11 +12,15 @@ nav.navbar.navbar-light
     // Show this for logged out users
     +navbar(publicNavItems)( show-authed="false")
 
-    -var authNavItems = [{state: 'home'}, {state: 'article'}]
+    -var authNavItems = [{state: 'home'}]
     
     // Show this for logged in users
     +navbar(authNavItems)( show-authed="true")
         
+        +nav-item({state: 'editor', label: 'New Article'})
+            i.ion-compose 
+            |&nbsp;
+            
         +nav-item({state: 'settings'})
             i.ion-gear-a 
             |&nbsp;
