@@ -1,11 +1,19 @@
 
 // form-control mixin
-mixin form-control(fldType, pholder, model)
+mixin form-control(fldType, pholder, model, rows)
 
     fieldset.form-group&attributes(attributes)
         
-        input.form-control.form-control-lg(
-            type=fldType placeholder=pholder
-            ng-model="$ctrl." + model
-        )
-        
+        unless rows
+            input.form-control.form-control-lg(
+                type=fldType placeholder=pholder
+                ng-model="$ctrl." + model
+            )
+        else 
+            #{fldType}(class="form-control form-control-lg" placeholder=pholder
+                ng-model="$ctrl." + model
+                rows=rows
+            )
+            
+        if block
+            block
