@@ -29,7 +29,7 @@ div.auth-page
                     fieldset(ng-disabled="$ctrl.isSubmitting")
 
                         // username field
-                        +form-control("text", "Username", "formData.username")( ng-show="$ctrl.authType === 'register'")
+                        +form-control("text", "Username", "formData.username")(groupAttrs={'ng-show' : "$ctrl.authType === 'register'"})
                         
                         // email field
                         +form-control("email", "Email", "formData.email")
