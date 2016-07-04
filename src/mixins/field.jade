@@ -1,0 +1,17 @@
+
+// field mixin
+mixin field(fldType, pholder, model, rows)
+
+    unless rows
+        input.form-control.form-control-lg(
+            type=fldType placeholder=pholder
+            ng-model="$ctrl." + model
+        )&attributes(attributes)
+    else 
+        #{fldType}(class="form-control form-control-lg" placeholder=pholder
+            ng-model="$ctrl." + model
+            rows=rows
+        )&attributes(attributes)
+
+    if block
+        block

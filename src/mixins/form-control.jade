@@ -2,18 +2,26 @@
 // form-control mixin
 mixin form-control(fldType, pholder, model, rows)
 
-    fieldset.form-group&attributes(attributes)
+    if attributes.groupAttrs
         
-        unless rows
-            input.form-control.form-control-lg(
-                type=fldType placeholder=pholder
-                ng-model="$ctrl." + model
-            )
-        else 
-            #{fldType}(class="form-control form-control-lg" placeholder=pholder
-                ng-model="$ctrl." + model
-                rows=rows
-            )
+        fieldset.form-group&attributes(attributes.groupAttrs)
+        
+            if attributes.fldAttrs
+                +field(fldType, pholder, model, rows)&attributes(attributes.fldAttrs)
+            else
+                +field(fldType, pholder, model, rows)
             
-        if block
-            block
+            if block
+                block
+    else
+        
+        fieldset.form-group
+        
+            
+            if attributes.fldAttrs
+                +field(fldType, pholder, model, rows)&attributes(attributes.fldAttrs)
+            else
+                +field(fldType, pholder, model, rows)
+                    
+            if block
+                block
