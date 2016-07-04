@@ -5,8 +5,7 @@ div.article-page
     div.banner
         div.container
 
-            h1
-                |Example article title
+            h1(ng-bind="::$ctrl.article.title")
 
             div.article-meta
 
@@ -43,17 +42,13 @@ div.article-page
                     div.col-xs-12
 
                         div
-                            p
-                                | This is the content of our article.
+                            div(ng-bind-html="::$ctrl.article.body")
 
                         ul.tag-list
-                            li.tag-default.tag-pill.tag-outline
-                                | Tag One
-
-                            li.tag-default.tag-pill.tag-outline
-
-                                | Tag Two
-
+                            li.tag-default.tag-pill.tag-outline( ng-repeat="tag in $ctrl.article.tagList")
+                                
+                                | {{tag}}
+                                
                 hr
                 div.article-actions
 
