@@ -14,7 +14,6 @@ export default class Articles{
     save(article){
 
         let request = {};
-        request.data = {article: article};
         request.url = this._AppConstants.api + '/articles';
 
         // if there's a lug, perform an update via PUT
@@ -34,6 +33,9 @@ export default class Articles{
             request.method = 'POST';
         }
 
+        // set the article data in the data attribute of our request
+        request.data = {article: article};
+
         return this._http(request).then((res) => res.data.article)
     }
 
@@ -51,7 +53,7 @@ export default class Articles{
 
         this._http({
 
-            url: this._AppConstants + '/articles' + slug,
+            url: this._AppConstants.api + '/articles/' + slug,
             method: 'GET'
         })
         .then(
