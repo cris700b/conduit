@@ -1,3 +1,7 @@
+
+// import the marked plugin 
+import marked from 'marked';
+
 class ArticleCtrl {
   constructor($sce, $rootScope, article) {
     'ngInject';
