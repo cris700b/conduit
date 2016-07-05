@@ -1,0 +1,11 @@
+
+div.article-meta
+    a(ui-sref="app.profile({username: $ctrl.article.author.username})")
+        img(ng-src="{{$ctrl.article.author.image}}")
+        
+    div.info    
+        a.author(ui-sref="app.profile({username: $ctrl.article.author.username})" ng-bind="$ctrl.article.author.username")
+        
+        span.date(ng-bind="$ctrl.article.createdAt | date: 'longDate'")
+        
+    ng-transclude

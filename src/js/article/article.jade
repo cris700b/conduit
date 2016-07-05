@@ -7,32 +7,23 @@ div.article-page
 
             h1(ng-bind="::$ctrl.article.title")
 
-            div.article-meta
+            // Show author info + favorite & follow buttons
+            article-meta(article="$ctrl.article")
 
-                // Show author info + favorite & follow buttons
-                div.article-meta
-                    a( href="")
-                        img
-                    div.info
-                        a.author(href="")
-                            | Brad Green
-                        span.date
-                            |January 20th
+                button.btn.btn-sm.btn-outline-secondary
+                    i.ion-plus-round
 
-                    button.btn.btn-sm.btn-outline-secondary
-                        i.ion-plus-round
+                    | &nbsp;
+                    |Follow Brad Green
 
-                        | &nbsp;
-                        |Follow Brad Green
-
+                |&nbsp;
+                button.btn.btn-sm.btn-outline-primary
+                    i.ion-heart
                     |&nbsp;
-                    button.btn.btn-sm.btn-outline-primary
-                        i.ion-heart
-                        |&nbsp;
-                        |Favorite Article
+                    |Favorite Article
 
-                        span.counter
-                            |(29)
+                    span.counter
+                        |(29)
 
             // Main view. Contains article html and comments
             div.container.page
@@ -53,15 +44,8 @@ div.article-page
                 div.article-actions
 
                     // Show author info + favorite & follow buttons
-                    div.article-meta
-                        a(href="")
-                            img
-                        div.info
-                            a.author(href="")
-                                | Brad Green
-                            span.date
-                                | January 20th
-
+                    article-meta(article="$ctrl.article")
+                        
                         button.btn.btn-sm.btn-outline-secondary
                             i.ion-plus-round
                             | &nbsp;
