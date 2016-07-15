@@ -1,0 +1,13 @@
+{
+    "passfail" : false,
+    "maxerr" : 100,
+    "browser" : true,
+    "jquery" : true,
+    "debug" : false,
+    "devel" : true,
+    "esversion" : 6,
+    "laxbreak" : true,
+    "strict" : false,
+    "globalstrict" : false,
+    "node" : false
+}
