@@ -4,27 +4,35 @@
   "description": "Angular frontend for Conduit",
   "author": "Thinkster",
   "license": "MIT",
-  "dependencies": {
-    "angular": "^1.5.0-rc.2",
-    "angular-ui-router": "^0.2.17",
-    "babel-preset-es2015": "^6.3.13",
-    "babelify": "^7.2.0",
-    "browser-sync": "^2.11.1",
-    "browserify": "^13.0.0",
-    "browserify-ngannotate": "^2.0.0",
-    "del": "^2.2.1",
-    "gulp": "^3.9.1",
-    "gulp-angular-templatecache": "^1.8.0",
-    "gulp-coffee": "^2.3.2",
-    "gulp-concat": "^2.6.0",
-    "gulp-insert": "^0.5.0",
-    "gulp-jade": "^1.1.0",
-    "gulp-notify": "^2.2.0",
-    "gulp-rename": "^1.2.2",
-    "gulp-uglify": "^1.5.3",
-    "gulp-util": "^3.0.7",
-    "marked": "^0.3.5",
-    "merge-stream": "^1.0.0",
-    "vinyl-source-stream": "^1.1.0"
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cris700b/conduit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cris700b/conduit/issues"
+  },
+  "homepage": "https://github.com/cris700b/conduit#readme",
+  "devDependencies": {
+    "browser-sync": "^2.13.0",
+    "concat": "0.0.1-security",
+    "insert": "^1.0.1",
+    "jshint": "^2.9.2",
+    "npm-run-all": "^2.3.0",
+    "pug": "^2.0.0-beta3"
+  },
+  "scripts": {
+    "clean:build": "if exist build rd /S /Q build",
+    "clean:dist": "if exist dist rd /S /Q dist",
+    "cmd-clean": "run-p clean:*",
+    "lint": "jshint src",
+    "preconcat-mixins": "if not exist build mkdir build && if not exist build\\mixins mkdir build\\mixins",
+    "concat-mixins": "concat-cli -f src\\mixins -o build\\mixins\\jade_components.jade",
+    "insert": "",
+    "prepug": "run-all cmd-clean -s concat-mixins insert",
+    "pug": "pug src --pretty -o build",
+    "browser-sync": "browser-sync start --server dist --port 4000 --no-notify --ui-port 4001 --files dist",
+    "presrv": "run-p lint pug",
+    "srv": "browser-sync"
   }
 }
