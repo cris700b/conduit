@@ -33,6 +33,6 @@ function AuthConfig($stateProvider, $httpProvider){
     }
   });
 
-};
+}
 
 export default AuthConfig;

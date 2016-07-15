@@ -1,5 +1,5 @@
 
-// import the marked plugin 
+// import the marked plugin
 import marked from 'marked';
 
 class ArticleCtrl {
