@@ -3,7 +3,7 @@
 import angular from 'angular';
 
 // include the ui-router config Settings
-import EditorConfig from './editor.config'
+import EditorConfig from './editor.config';
 
 // include the controller
 import EditorCtrl from './editor.controller';

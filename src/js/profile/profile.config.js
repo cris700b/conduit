@@ -23,6 +23,6 @@ function ProfileConfig($stateProvider) {
     }
   });
 
-};
+}
 
 export default ProfileConfig;

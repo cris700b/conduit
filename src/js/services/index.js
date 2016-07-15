@@ -4,7 +4,7 @@ import angular from 'angular';
 import UserSrv from './user.service';
 
 // import the jwt service
-import JwtService from './jwt.service'
+import JwtService from './jwt.service';
 
 // import the profile service
 import Profile from './profile.service';

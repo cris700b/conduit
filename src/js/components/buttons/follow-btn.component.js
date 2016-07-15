@@ -27,7 +27,7 @@ class FollowBtnCtrl{
 
                             this.isSubmitting = false;
                             this.user.following = false;
-                         })
+                        });
         }
 
         // otherwise, follow them
@@ -38,7 +38,7 @@ class FollowBtnCtrl{
 
                             this.isSubmitting = false;
                             this.user.following = true;
-                         })
+                        });
         }
     }
 }

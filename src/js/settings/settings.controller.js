@@ -42,6 +42,6 @@ class SettingsCtrl {
                   );
     }
 
-};
+}
 
 export default SettingsCtrl;

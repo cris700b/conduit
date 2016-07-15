@@ -172,7 +172,7 @@ gulp.task('default', ['html', 'browserify'], function() {
         }
     });
 
-    gulp.watch("src/index.html", ['html']);
+    gulp.watch("src/index.jade", ['html']);
     gulp.watch([files.view, '!' + files.mixins], ['views']);
     gulp.watch(files.js, ['browserify']);
 

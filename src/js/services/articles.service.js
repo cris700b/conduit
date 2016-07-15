@@ -36,7 +36,7 @@ export default class Articles{
         // set the article data in the data attribute of our request
         request.data = {article: article};
 
-        return this._http(request).then((res) => res.data.article)
+        return this._http(request).then((res) => res.data.article);
     }
 
     // retrieve a single article

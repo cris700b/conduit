@@ -10,6 +10,6 @@ function HomeConfig($stateProvider) {
     title: 'Home'
   });
 
-};
+}
 
 export default HomeConfig;

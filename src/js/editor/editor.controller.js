@@ -46,7 +46,7 @@ class EditorCtrl{
         this._Articles.save(this.article)
                         .then((newArticle) => {
 
-                            this._state.go('app.article', {slug: newArticle.slug})
+                            this._state.go('app.article', {slug: newArticle.slug});
                         },
                         (err) => {
 

@@ -41,8 +41,8 @@ function EditorConfig($stateProvider){
                                     // if there is an error (article does not exist), redirect to the home page
                                     (err) => {
 
-                                        $state.go('app.home')
-                                    })
+                                        $state.go('app.home');
+                                    });
                 }
 
                 // if thise is a new article, then just return null
@@ -52,7 +52,7 @@ function EditorConfig($stateProvider){
                 }
             }
         }
-    })
-};
+    });
+}
 
 export default EditorConfig;
